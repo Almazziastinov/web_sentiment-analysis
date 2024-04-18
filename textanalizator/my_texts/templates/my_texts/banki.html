@@ -1,0 +1,29 @@
+{%extends 'main/layout.html'%}
+
+
+{%block tittle%}Контент{%endblock%}
+{%block content%}
+    <div class="subblock">
+        <div class="txtblock">
+
+
+
+            {% csrf_token %}
+            {% for value in text %}
+            <div class="banki-block">
+
+                <p>{{ value.title }}</p>
+                <p>{{value.text}}</p>
+                <p>{{value.name}}</p>
+                <p>{{value.tone}}</p>
+                <hr>
+
+            </div>
+            {% endfor %}
+
+
+        </div>
+
+    </div>
+
+{%endblock%}

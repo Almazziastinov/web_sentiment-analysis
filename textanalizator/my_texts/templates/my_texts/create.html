@@ -1,0 +1,21 @@
+{%extends 'main/layout.html'%}
+
+{%block tittle%}Анализ текста{%endblock%}
+{%block content%}
+
+        <h1 class="tittle_">Анализ текста</h1>
+        <form method = "post">
+            {% csrf_token %}
+            <div class="subblock">
+                {{ form.content }}
+                <br>
+                <button type = 'submit'>Анализ</button>
+                <p id="tonee">{{tone}}</p>
+            </div>
+
+        </form>
+
+
+
+
+{%endblock%}

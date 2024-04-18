@@ -1,0 +1,38 @@
+{%extends 'main/layout.html'%}
+
+{%block tittle%}Тексты{%endblock%}
+{%block content%}
+
+        <h1 class="tittle_">Тексты</h1>
+
+        <form method = "get">
+            <select name="sources" id="sources">
+                <option value="all"></option>
+                <option value="news">Новости</option>
+                <option value="banks">Банки</option>
+                <option value="client">client</option>
+            </select>
+            <input type="text" name="db_query" placeholder="Введите запрос">
+            <input type="date" name="date" placeholder="Введите дату">
+            <button type = 'submit'>Найти</button>
+
+        </form>
+
+        <div class="subblock">
+            <textarea class="tar" name="general_textarea" rows="16" cols="87%">
+                {% for el in text %}
+                Источник: {{el.source}}
+
+                Запрос: {{el.query}}
+
+                {{el.content}}
+
+                Дата: {{el.date}}
+
+                Тональность: {{el.tone}}
+                {% endfor %}
+            </textarea>
+        </div>
+
+{%endblock%}
+

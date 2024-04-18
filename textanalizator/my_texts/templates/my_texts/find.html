@@ -1,0 +1,26 @@
+{%extends 'main/layout.html'%}
+
+
+{%block tittle%}Поиск текста{%endblock%}
+{%block content%}
+<div class = find_block>
+
+    <h1 class="tittle_">Поиск текста</h1>
+        <form method = "get" action="{% url 'content' %}">
+            {% csrf_token %}
+            <select name="source" id="source">
+              <option value="news">Новости</option>
+              <option value="banks">Банки ру</option>
+            </select>
+            <input type="text" name="query" placeholder="Введите запрос">
+            <button type = 'submit'>Найти</button>
+
+
+
+        </form>
+</div>
+
+
+
+
+{%endblock%}

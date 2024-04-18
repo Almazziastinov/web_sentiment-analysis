@@ -1,0 +1,20 @@
+{%extends 'main/layout.html'%}
+
+
+{%block tittle%}Контент{%endblock%}
+{%block content%}
+    <div class="subblock">
+        <div class="txtblock">
+
+
+
+            {% csrf_token %}
+            <a name="sentence">{{ text.text_part }}</a>
+            <p name="ton">{{text.ton}}</p>
+
+
+        </div>
+
+    </div>
+
+{%endblock%}

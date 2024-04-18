@@ -1,0 +1,32 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block tittle%}{%endblock%}</title>
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <aside class="elements_block">
+
+
+    </aside>
+    <div class="block">
+        {%block content%}
+        {%endblock%}
+        <br>
+        <br>
+        <hr size="2" width="80%" color="#C7C7C7" />
+        <p><a href="{% url 'create' %}" id = "create_buton"><button>Анализ своего текста</button></a></p>
+        <p><a href="{% url 'find' %}" id = "find_web_buton"><button>Начать поиск</button></a></p>
+        <p><a href="{% url 'texts' %}" id = "find_bd_buton"><button>Найти в базе данных</button></a></p>
+        <p><a href="{% url 'dynamics' %}" id = "dynamic_analysis_buton"><button>Провести анализ в динамике</button></a></p>
+
+
+    </div>
+</body>
+</html>

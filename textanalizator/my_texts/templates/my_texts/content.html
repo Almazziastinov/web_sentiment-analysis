@@ -1,0 +1,21 @@
+{%extends 'main/layout.html'%}
+
+
+{%block tittle%}Контент{%endblock%}
+{%block content%}
+    <div class="subblock">
+
+        {% for value in text %}
+            <div class="content-block">
+
+                <a href="{% url 'some_content' %}?url={{ value.url }}&amp;query={{ value.query }}" >{{ value.title }}</a>
+                <img src="{{ value.img_url }}" alt="{{ value.title }}">
+
+            </div>
+        {% endfor %}
+
+
+
+    </div>
+
+{%endblock%}
