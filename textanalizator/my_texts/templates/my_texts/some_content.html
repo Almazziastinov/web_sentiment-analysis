@@ -7,7 +7,9 @@
         <div class="txtblock">
 
 
-
+            <style>
+                p {{% if text.ton == 'negative' %}background-color: red;{% elif text.ton == 'positive' %}background-color: green;{% endif %}}
+            </style>
             {% csrf_token %}
             <a name="sentence">{{ text.text_part }}</a>
             <p name="ton">{{text.ton}}</p>

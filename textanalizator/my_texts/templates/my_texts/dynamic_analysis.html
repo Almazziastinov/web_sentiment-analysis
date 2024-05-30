@@ -2,9 +2,11 @@
 {%block tittle%}Поиск по датам{%endblock%}
 {%block content%}
 <div class = find_block>
+
     <form method = "get">
 
         <input type="text" name="db_query" placeholder="Введите запрос">
+        <br>
         <label for="start_date">Начальная дата:</label>
         <input type="date" id="start_date" name="start_date">
         <br>
@@ -13,20 +15,20 @@
         <br>
         <button type = 'submit'>Найти</button>
 
+
     </form>
-        {% for date, tones in res.items %}
-            <tr>
-            <td>Дата: {{ date }}</td><br>
-            <td>Позитивные: {{ tones.positive }}</td><br>
-            <td>Негативные: {{ tones.negative }}</td><br>
+    <div class="txtblock">
+        <p>{{ std }},  {{edt}}</p>
+        <p style="background-color: #96EBBB; height: 40px; font-size: 30px;">Позитивные: {{ res.total_positive }}</p>
+        <p style="background-color: #EB9696; height: 40px; font-size: 30px;">Негативные: {{ res.total_negative }}</p>
+
             </tr>
-        {% endfor %}
         <h3>График</h3>
         <div id="plot_div">
         {{ plot_div|safe }}
         </div>
 
-
+    </div>
 
 
 </div>

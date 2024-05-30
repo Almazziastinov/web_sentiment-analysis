@@ -275,12 +275,12 @@ def get_some_content(request):
             # Например, можно использовать Content_parcing.logic(url)
             text = Content_parcing.content_parcing(url)
 
-            article = Articles(
-                source="Новости",
-                content=text['text_part'],
-                tone=text['ton'],
-                query=query
-            )
+            article, created = Articles.objects.get_or_create(content=text['text_part'], defaults={
+                'source': "Новости",
+                'content': text['text_part'],
+                'tone': text['ton'],
+                'query': query
+            })
 
             # Сохраняем экземпляр в базу данных
             article.save()
@@ -305,9 +305,10 @@ def dynamic_analysis(request):
 
                 # Ищем статьи с датами в заданном диапазоне
                 articles = Articles.objects.filter(query = query,date__range=[start_date, end_date])
-                res = logic(articles)
+                plt, res = logic(articles)
+                plot_div = generate_plot(plt)
 
-                return render(request, 'my_texts/dynamic_analysis.html', {'res': res})
+                return render(request, 'my_texts/dynamic_analysis.html', {'res': res, 'plot_div': plot_div})
             except ValueError:
                 # Обработка некорректного формата дат или других ошибок
                 return render(request, 'error.html', {'message': 'Некорректный формат даты'})
@@ -319,9 +320,10 @@ def dynamic_analysis(request):
 
                 # Ищем статьи с датами в заданном диапазоне
                 articles = Articles.objects.filter(query=query, date__range=[start_date, end_date])
-                res = logic(articles)
+                plt, res = logic(articles)
+                plot_div = generate_plot(plt)
 
-                return render(request, 'my_texts/dynamic_analysis.html', {'res': res})
+                return render(request, 'my_texts/dynamic_analysis.html', {'res': res, 'plot_div': plot_div})
             except ValueError:
                 # Обработка некорректного формата дат или других ошибок
                 return render(request, 'error.html', {'message': 'Некорректный формат даты'})
@@ -331,9 +333,10 @@ def dynamic_analysis(request):
 
                 # Ищем статьи с датами в заданном диапазоне
                 articles = Articles.objects.filter(query=query, date__contains=end_date)
-                res = logic(articles)
+                plt, res = logic(articles)
+                plot_div = generate_plot(plt)
 
-                return render(request, 'my_texts/dynamic_analysis.html', {'res': res})
+                return render(request, 'my_texts/dynamic_analysis.html', {'res': res, 'plot_div': plot_div})
             except ValueError:
                 # Обработка некорректного формата дат или других ошибок
                 return render(request, 'error.html', {'message': 'Некорректный формат даты'})
@@ -344,9 +347,10 @@ def dynamic_analysis(request):
 
                 # Ищем статьи с датами в заданном диапазоне
                 articles = Articles.objects.filter(date__range=[start_date, end_date])
-                res = logic(articles)
+                plt, res = logic(articles)
+                plot_div = generate_plot(plt)
 
-                return render(request, 'my_texts/dynamic_analysis.html', {'res': res})
+                return render(request, 'my_texts/dynamic_analysis.html', {'res': res, 'plot_div': plot_div, "std": start_date.date(), "edt":end_date})
             except ValueError:
                 # Обработка некорректного формата дат или других ошибок
                 return render(request, 'error.html', {'message': 'Некорректный формат даты'})
@@ -358,9 +362,10 @@ def dynamic_analysis(request):
                 # Ищем статьи с датами в заданном диапазоне
                 articles = Articles.objects.filter(date__contains= end_date)
 
-                res = logic(articles)
+                plt, res = logic(articles)
+                plot_div = generate_plot(plt)
 
-                return render(request, 'my_texts/dynamic_analysis.html', {'res': res})
+                return render(request, 'my_texts/dynamic_analysis.html', {'res': res, 'plot_div': plot_div})
             except ValueError:
                 # Обработка некорректного формата дат или других ошибок
                 return render(request, 'error.html', {'message': 'Некорректный формат даты'})
@@ -372,10 +377,10 @@ def dynamic_analysis(request):
                 # Ищем статьи с датами в заданном диапазоне
                 articles = Articles.objects.filter(date__range=[start_date, end_date])
                 datetime.combine(today, datetime.max.time())
-                res = logic(articles)
-                plot_div = generate_plot(res)
+                plt, res = logic(articles)
+                plot_div = generate_plot(plt)
 
-                return render(request, 'my_texts/dynamic_analysis.html', {'res': res, 'plot_div': plot_div, })
+                return render(request, 'my_texts/dynamic_analysis.html', {'res': res, 'plot_div': plot_div })
             except ValueError:
                 # Обработка некорректного формата дат или других ошибок
                 return render(request, 'error.html', {'message': 'Некорректный формат даты'})

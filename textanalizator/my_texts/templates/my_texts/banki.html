@@ -10,12 +10,13 @@
 
             {% csrf_token %}
             {% for value in text %}
-            <div class="banki-block">
+
+            <div class="banki-block" style="{% if value.tone == 'Negative' %}background-color: #F7EBEB;{% elif value.tone == 'Positive' %}background-color: #EBF7EE;{% endif %}">
 
                 <p>{{ value.title }}</p>
                 <p>{{value.text}}</p>
                 <p>{{value.name}}</p>
-                <p>{{value.tone}}</p>
+                <p style="{% if value.tone == 'Negative' %}background-color: #EB9696;{% elif value.tone == 'Positive' %}background-color: #96EBBB;{% endif %}; height: 40px; font-size: 30px;">{{value.tone}}</p>
                 <hr>
 
             </div>

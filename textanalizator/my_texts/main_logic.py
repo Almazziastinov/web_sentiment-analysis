@@ -1,5 +1,8 @@
+from datetime import datetime
 def logic(articles):
     tones_by_date = {}
+    tot_pos = 0
+    tot_neg = 0
 
     for article in articles:
         article_date = article.date.strftime('%Y-%m-%d')  # Преобразуем дату в строку формата 'YYYY-MM-DD'
@@ -9,10 +12,15 @@ def logic(articles):
 
         if article.tone == 'Negative':
             tones_by_date[article_date]['negative'] += 1
+            tot_neg +=1
         else:
             tones_by_date[article_date]['positive'] += 1
+            tot_pos += 1
 
-    return tones_by_date
+
+
+    return tones_by_date,{'total_positive': tot_pos, 'total_negative': tot_neg}
+
 
 from django.shortcuts import render
 import plotly.graph_objs as go

@@ -18,20 +18,18 @@
 
         </form>
 
-        <div class="subblock">
-            <textarea class="tar" name="general_textarea" rows="16" cols="87%">
+        <div class="txtblock">
                 {% for el in text %}
-                Источник: {{el.source}}
-
-                Запрос: {{el.query}}
-
-                {{el.content}}
-
-                Дата: {{el.date}}
-
-                Тональность: {{el.tone}}
+                <div class="banki-block" style="{% if el.tone == 'Negative' %}background-color: #F7EBEB;{% elif el.tone == 'Positive' %}background-color: #EBF7EE;{% endif %};">
+                <p>Источник: {{el.source}}</p>
+                <p>Запрос: {{el.query}}</p>
+                <p>Содержание: {{el.content}}</p>
+                <p>Дата: {{el.date}}</p>
+                <p style="{% if el.tone == 'Negative' %}background-color: #EB9696;{% elif el.tone == 'Positive' %}background-color: #96EBBB;{% endif %}; height: 40px; font-size: 30px;">Тональность: {{el.tone}}</p>
+                <hr>
+                </div>
                 {% endfor %}
-            </textarea>
+
         </div>
 
 {%endblock%}
